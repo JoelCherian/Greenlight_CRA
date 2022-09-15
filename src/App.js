@@ -1,12 +1,19 @@
-import './App.css';
+import React from 'react'
 import Sidebar from './components/Sidebar'
+import { BrowserRouter } from 'react-router-dom'
+import {Routing} from './Routes'
 
-function App() {
+const App = () => {
   return (
-    <div>
-    <Sidebar></Sidebar>  
-    </div>
-  );
+
+    <BrowserRouter>
+    <Sidebar>
+      <Routing></Routing>
+    </Sidebar>
+    </BrowserRouter>
+    
+    
+  )
 }
 
-export default App;
+export default App

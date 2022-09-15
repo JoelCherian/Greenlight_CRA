@@ -1,42 +1,26 @@
 
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import {
-  Bars3BottomLeftIcon,
-  BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  UsersIcon,
-  XMarkIcon,
+import logo from './logo.png'
+import {Link} from 'react-router-dom'
+import {Bars3BottomLeftIcon,BellIcon,CalendarIcon,ChartBarIcon,HomeIcon,InboxIcon,UsersIcon, XMarkIcon,ChatBubbleLeftEllipsisIcon,
+        DocumentIcon, ExclamationCircleIcon, ShieldExclamationIcon, CursorArrowRaysIcon
 } from '@heroicons/react/24/outline'
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+
+import { DocumentTextIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { useLocation } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  { name: 'Home', href: '/Home', icon: HomeIcon },
+  { name: 'Dashboard', href: '/Dashboard', icon: UsersIcon},
+  { name: 'Updates', href: '#', icon: ChatBubbleLeftEllipsisIcon },
+  { name: 'Document Library', href: '/Document_Library', icon: DocumentIcon },
+  { name: 'Records', href: '#', icon: InboxIcon },
+  { name: 'My Actions', href: '#', icon: CursorArrowRaysIcon },
+  { name: 'Calendar', href: '#', icon: CalendarIcon },
+  { name: 'Report : Incident', href: '#', icon: ExclamationCircleIcon },
+  { name: 'Report : Hazard', href: '#', icon: ShieldExclamationIcon },
+  { name: 'Improvements', href: '#', icon: ChartBarIcon },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -48,20 +32,27 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Sidebar() {
+function todaysdate(){
+
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+  var dateObj = new Date();
+  var day = dateObj.getUTCDate();
+
+  
+  return day + '-' + monthNames[dateObj.getMonth()];
+}
+
+export default function Sidebar({children}) {
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const { pathname } = useLocation();
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
+    
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
@@ -87,7 +78,7 @@ export default function Sidebar() {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-indigo-700 pt-5 pb-4">
+                <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-[#0b1228] pt-5 pb-4">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-300"
@@ -111,25 +102,29 @@ export default function Sidebar() {
                   <div className="flex flex-shrink-0 items-center px-4">
                     <img
                       className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300"
-                      alt="Your Company"
+                      src= {logo}
+                      alt="Greenlight"
                     />
+                  <span className='ml-2 text-2xl text-stone-50 '>Greenlight</span>
                   </div>
                   <div className="mt-5 h-0 flex-1 overflow-y-auto">
                     <nav className="space-y-1 px-2">
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600',
-                            'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                          )}
-                        >
-                          <item.icon className="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300" aria-hidden="true" />
-                          {item.name}
-                        </a>
-                      ))}
+                    {navigation.map((item) => {
+
+const isActive = pathname === item.href;
+return(
+
+<Link  key={item.name} to={item.href} 
+    className={classNames(
+      isActive? 'bg-green-300 text-black' : 'text-indigo-100 hover:bg-[#d7d7d77f]',
+      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+    )}
+  >
+    <item.icon className= {classNames(
+      isActive? 'mr-3 h-6 w-6 flex-shrink-0 text-black':'mr-3 h-6 w-6 flex-shrink-0 text-slate-100')} aria-hidden="true" />
+    {item.name}
+  </Link>
+)})}
                     </nav>
                   </div>
                 </Dialog.Panel>
@@ -141,70 +136,67 @@ export default function Sidebar() {
           </Dialog>
         </Transition.Root>
 
+      
+        {/*  ************************** DESKTOP ************************************/}
+
         {/* Static sidebar for desktop */}
-        <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+        <div id = 'sidebar' className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-grow flex-col overflow-y-auto bg-indigo-700 pt-5">
-            <div className="flex flex-shrink-0 items-center px-4">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300"
-                alt="Your Company"
-              />
+          <div  className="flex flex-grow flex-col overflow-y-auto bg-[#0b1228] pt-5">
+            <div className="flex flex-shrink-0 items-center px-4 mb-3">
+              <img className="h-8 w-auto"  src= {logo}  alt= "Greenlight" />
+              <span className='ml-2 text-2xl text-stone-50 '>Greenlight</span>
             </div>
             <div className="mt-5 flex flex-1 flex-col">
-              <nav className="flex-1 space-y-1 px-2 pb-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
+              <nav className="flex-1 space-y-2 px-2 pb-4">
+
+                {navigation.map((item) => {
+                const isActive = pathname === item.href;
+                return(
+
+                 <Link  key={item.name} to={item.href} 
                     className={classNames(
-                      item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600',
+                    isActive? 'bg-green-300 text-black' : 'text-indigo-100 hover:bg-[#bcffd63d]',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                     )}
                   >
-                    <item.icon className="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300" aria-hidden="true" />
+                  <item.icon className= {classNames(
+                    isActive? 'mr-3 h-6 w-6 flex-shrink-0 text-black':'mr-3 h-6 w-6 flex-shrink-0 text-slate-100')} aria-hidden="true" />
                     {item.name}
-                  </a>
-                ))}
+                  </Link>
+)})}
               </nav>
             </div>
           </div>
         </div>
-        <div className="flex flex-1 flex-col md:pl-64">
-          <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
-            <button
-              type="button"
-              className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <span className="sr-only">Open sidebar</span>
+
+       {/* Main div */}
+
+        <div  className="flex flex-1 flex-col md:pl-64 ">
+           {/* space on top */}
+
+          <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-[#040d2f] ">
+
+              {/* Mobile toggle button  */}
+            <button type="button"
+              className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset  md:hidden"
+              onClick={() => setSidebarOpen(true)}>
               <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
             </button>
-            <div className="flex flex-1 justify-between px-4">
-              <div className="flex flex-1">
-                <form className="flex w-full md:ml-0" action="#" method="GET">
-                  <label htmlFor="search-field" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                      <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <input
-                      id="search-field"
-                      className="block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
-                      placeholder="Search"
-                      type="search"
-                      name="search"
-                    />
-                  </div>
-                </form>
-              </div>
-              <div className="ml-4 flex items-center md:ml-6">
+              
+              
+            
+            <div className="flex flex-1 justify-between px-4 items-center  ">
+
+             <span className='text-white text-xl '> {pathname.toUpperCase().replace('_', ' ').split('/')}</span>
+
+              <div className="ml-4 flex items-center md:ml-6 gap-2">
+
+              <span className='text-white text-xl pr-2 '> {todaysdate()}</span>
+             {/* notifications button*/}
                 <button
                   type="button"
-                  className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="rounded-full bg-inherit p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -217,7 +209,7 @@ export default function Sidebar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="https://previews.123rf.com/images/remodesigner/remodesigner1906/remodesigner190600575/131360456-portrait-of-a-young-man-with-beard-and-hair-style-male-avatar-vector-illustration-.jpg"
                         alt=""
                       />
                     </Menu.Button>
@@ -254,18 +246,19 @@ export default function Sidebar() {
             </div>
           </div>
 
+
+                 {/* Main Content*/}
+
           <main>
-            <div className="py-6">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-              </div>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                {/* Replace with your content */}
-                <div className="py-4">
-                  <div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
+            <div className="py-6 bg-[#040d2f] h-screen ">
+      
+                 <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+              
+                 {children}  
+
                 </div>
-                {/* /End replace */}
-              </div>
+
+
             </div>
           </main>
         </div>
