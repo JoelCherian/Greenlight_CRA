@@ -54,6 +54,7 @@ export default function Sidebar({children}) {
     <>
     
       <div>
+
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -137,18 +138,19 @@ return(
         </Transition.Root>
 
       
-        {/*  ************************** DESKTOP ************************************/}
+        {/*  **************************** DESKTOP ************************************/}
 
         {/* Static sidebar for desktop */}
-        <div id = 'sidebar' className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+         {/* <div id = 'sidebar' className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">*/}
+        <div id = 'sidebar' className="hidden md:fixed md:flex md:w-64 md:flex-co md:h-full ">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div  className="flex flex-grow flex-col overflow-y-auto bg-[#0b1228] pt-5">
+          <div  className="flex flex-grow flex-col overflow-y-auto bg-[#0b1228] pt-5 ">
             <div className="flex flex-shrink-0 items-center px-4 mb-3">
               <img className="h-8 w-auto"  src= {logo}  alt= "Greenlight" />
               <span className='ml-2 text-2xl text-stone-50 '>Greenlight</span>
             </div>
             <div className="mt-5 flex flex-1 flex-col">
-              <nav className="flex-1 space-y-2 px-2 pb-4">
+              <nav className="flex-1 space-y-3 px-2 pb-4 ">
 
                 {navigation.map((item) => {
                 const isActive = pathname === item.href;
@@ -156,8 +158,8 @@ return(
 
                  <Link  key={item.name} to={item.href} 
                     className={classNames(
-                    isActive? 'bg-green-300 text-black' : 'text-indigo-100 hover:bg-[#bcffd63d]',
-                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                    isActive? 'bg-green-300 text-black' : 'text-indigo-100 hover:bg-[#1e2f44]',
+                      'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                     )}
                   >
                   <item.icon className= {classNames(
@@ -172,10 +174,13 @@ return(
 
        {/* Main div */}
 
+ {/*  <div  className="flex flex-1 flex-col md:pl-64"> */}
         <div  className="flex flex-1 flex-col md:pl-64 ">
+         
+         
            {/* space on top */}
 
-          <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-[#040d2f] ">
+          <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-[#040d2f] rounded-tr-xl ">
 
               {/* Mobile toggle button  */}
             <button type="button"
@@ -188,7 +193,7 @@ return(
             
             <div className="flex flex-1 justify-between px-4 items-center  ">
 
-             <span className='text-white text-xl '> {pathname.toUpperCase().replace('_', ' ').split('/')}</span>
+             <span className='text-white text-2xl '> {pathname.toUpperCase().replace('_', ' ').split('/')}</span>
 
               <div className="ml-4 flex items-center md:ml-6 gap-2">
 
@@ -247,10 +252,8 @@ return(
           </div>
 
 
-                 {/* Main Content*/}
-
           <main>
-            <div className="py-6 bg-[#040d2f] h-screen ">
+            <div className="py-6 bg-[#040d2f] md:h-screen ">
       
                  <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
               
@@ -262,6 +265,7 @@ return(
             </div>
           </main>
         </div>
+        
       </div>
     </>
   )
