@@ -2,6 +2,7 @@ import React from 'react'
 import { ClipboardDocumentCheckIcon,BookOpenIcon,PencilSquareIcon,
     ArrowsPointingOutIcon,PresentationChartLineIcon,NewspaperIcon,
     CircleStackIcon , ClipboardIcon, CheckBadgeIcon , Bars3BottomLeftIcon} from '@heroicons/react/24/outline'
+import Layout from '../components/Layout'
 
 const Document_Library = () => {
 
@@ -15,9 +16,9 @@ const options = [
     { name: 'REGISTERS',  icon: CircleStackIcon },
     { name: 'TEMPLATES',  icon: ClipboardIcon },
     { name: 'STANDARDS',  icon: CheckBadgeIcon },
-    { name: '.....................',  icon: CheckBadgeIcon },
-    { name: '......................',  icon: CheckBadgeIcon },
-    { name: '.....................',  icon: CheckBadgeIcon },
+    { name: '..........^^........',  icon: CheckBadgeIcon },
+    { name: '..........**............',  icon: CheckBadgeIcon },
+    { name: '..........##.........',  icon: CheckBadgeIcon },
 ]
 
 
@@ -25,11 +26,12 @@ const options = [
 
 
 
+<Layout>
  <div className='flex flex-row flex-wrap gap-7 mt-10 justify-center'>
      {options.map((item) => {
-   
+
    return(
-  <button
+  <button key = {item.name}
     type="button"
     className="inline-flex items-center w-72 rounded-lg  bg-[#1e2f44] px-16 py-5 text-lg font-medium text-white shadow-lg hover:bg-[#86efac] hover:text-black"
   >
@@ -40,6 +42,8 @@ const options = [
      )})}
 
   </div>
+  
+</Layout>
 
  
 

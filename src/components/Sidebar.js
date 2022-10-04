@@ -10,6 +10,8 @@ import {Bars3BottomLeftIcon,BellIcon,CalendarIcon,ChartBarIcon,HomeIcon,InboxIco
 import { DocumentTextIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { useLocation } from 'react-router-dom'
 
+import { Outlet } from 'react-router-dom';
+
 const navigation = [
   { name: 'Home', href: '/Home', icon: HomeIcon },
   { name: 'Dashboard', href: '/Dashboard', icon: UsersIcon},
@@ -45,7 +47,7 @@ function todaysdate(){
   return day + '-' + monthNames[dateObj.getMonth()];
 }
 
-export default function Sidebar({children}) {
+export default function Sidebar() {
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const { pathname } = useLocation();
@@ -252,7 +254,7 @@ return(
           </div>
 
 
-          <main>
+          {/* <main>
             <div className="py-6 bg-[#040d2f] md:h-screen ">
       
                  <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
@@ -263,10 +265,12 @@ return(
 
 
             </div>
-          </main>
+          </main> */}
         </div>
         
       </div>
+
+      <Outlet/>
     </>
   )
 }

@@ -1,16 +1,35 @@
 import React from 'react'
-import Sidebar from './components/Sidebar'
 import { BrowserRouter } from 'react-router-dom'
-import {Routing} from './Routes'
+import { Route, Routes } from "react-router-dom";
+import Home from './pages/Home'
+import Document_Library from './pages/Document_Library.js';
+import Sidebar from './components/Sidebar'
+import Login from './pages/Login'
+
 
 const App = () => {
   return (
 
-    <BrowserRouter>
-    <Sidebar>
-      <Routing></Routing>
-    </Sidebar>
-    </BrowserRouter>
+<BrowserRouter>
+
+
+  {/* <Sidebar/> */}
+
+    <Routes>
+
+    <Route element={<Sidebar/>}>
+        <Route path = "/Home" element = {<Home/>}/>
+        <Route path = "/Document_Library" element = {<Document_Library/>}/>
+     </Route>
+
+     <Route path = "/login" element = {<Login/>}/>
+        
+    </Routes>
+ 
+
+
+
+</BrowserRouter>
     
     
   )
