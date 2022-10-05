@@ -22,7 +22,7 @@ const App = () => {
         <Route path = "/Document_Library" element = {<Document_Library/>}/>
      </Route>
 
-     <Route path = "/login" element = {<Login/>}/>
+     <Route path = "/Login" element = {<Login/>}/>
         
     </Routes>
  
