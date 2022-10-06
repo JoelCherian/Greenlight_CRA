@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Document_Library from './pages/Document_Library.js';
 import Sidebar from './components/Sidebar'
 import Login from './pages/Login'
+import Register from './pages/Register';
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
      </Route>
 
      <Route path = "/Login" element = {<Login/>}/>
+     <Route path = "/Register" element = {<Register/>}/>
         
     </Routes>
  

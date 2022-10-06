@@ -182,7 +182,7 @@ return(
          
            {/* space on top */}
 
-          <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-[#040d2f] rounded-tr-xl ">
+          <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-[#040d2f] ">
 
               {/* Mobile toggle button  */}
             <button type="button"
