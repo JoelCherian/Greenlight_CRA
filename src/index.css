@@ -5,3 +5,13 @@
 body{
     background-color: #040d2f;
 }
+
+@layer components {
+    .register_input{
+      @apply block w-10/12 bg-[#5fba99] appearance-none rounded-xl  px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm;
+    }
+
+    .register_label{
+        @apply block text-sm font-medium text-[#cecece];
+    }
+  }

@@ -27,7 +27,7 @@ export default function Login() {
                     type="email"
                     autoComplete="email"
                     required
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    className="block w-full appearance-none rounded-xl border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -43,7 +43,7 @@ export default function Login() {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    className="block w-full appearance-none rounded-xl border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -73,10 +73,10 @@ export default function Login() {
       </button>
               </div>
 
-              <div>
+              <div className='flex justify-center'>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md border border-transparent bg-[#4fc681df] py-2 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="flex w-64 justify-center rounded-xl border border-transparent bg-[#49da85df] py-2 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   LOGIN
                 </button>
@@ -84,7 +84,7 @@ export default function Login() {
             </form>
 
 <div className='mt-5 text-center'>
-<span className='text-indigo-500 font-light text-base'>Looking forthe Greenlight website ? <a href ='#' className='hover:text-indigo-300 underline'>Click here!</a></span>
+<span className='text-indigo-500 font-normal text-base'>Looking for the Greenlight website ? <a href ='#' className='hover:text-indigo-300 underline'>Click here!</a></span>
 </div>     
 <div className='mt-2 text-center'>
 <span className='text-indigo-500 text-xs font-normal'>© Greenlight Copyright Software 2022 All rights reserved </span>
